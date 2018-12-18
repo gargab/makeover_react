@@ -11,7 +11,7 @@ import {Platform, StyleSheet, Text, View, KeyboardAvoidingView} from 'react-nati
 import {createAppContainer} from 'react-navigation';
 
 import Splash from './Splash'
-import AppNavigator from './AppNavigator'
+import MainNavigator from './MainNavigator'
 import Login from './src/components/Login/Login'
 
 const instructions = Platform.select({
@@ -37,7 +37,7 @@ type Props = {};
 //    }
 //  }
 
-const App = createAppContainer(AppNavigator);
+const App = createAppContainer(MainNavigator);
 
 export default App;
 

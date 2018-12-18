@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import {NavigationActions, DrawerActions} from 'react-navigation';
+import {NavigationActions, DrawerActions, StackActions} from 'react-navigation';
 import PropTypes from 'prop-types';
 import {ScrollView, Text, View, StyleSheet, Image, SafeAreaView} from 'react-native';
+
 
 class DrawerScreen extends Component {
   navigateToScreen = (route) => () => {
@@ -12,26 +13,40 @@ class DrawerScreen extends Component {
     this.props.navigation.dispatch(DrawerActions.closeDrawer())
   }
 
+  logout = () => {
+    // This will reset back to loginStack
+   // https://github.com/react-community/react-navigation/issues/1127
+   const actionToDispatch = StackActions.reset({
+     index: 0,
+     key: null,
+     actions: [NavigationActions.navigate({ routeName: 'loginnavigator' })]
+   })
+   this.props.navigation.dispatch(actionToDispatch)
+  }
+
   render () {
     return (
       <SafeAreaView style = {{flex:1}}>
         <ScrollView>
           <View>
             <View style={styles.menuItem}>
-              <Text onPress={this.navigateToScreen('login')}>
-                Login
-              </Text>
-            </View>
-            <View style={styles.menuItem}>
               <Text onPress={this.navigateToScreen('splash')}>
                Splash
               </Text>
             </View>
+
             <View style={styles.menuItem}>
               <Text onPress={this.navigateToScreen('newOrder')}>
                New Order
               </Text>
             </View>
+
+            <View style={styles.menuItem}>
+              <Text onPress={this.logout}>
+                Logout
+              </Text>
+            </View>
+
           </View>
         </ScrollView>
       </SafeAreaView>

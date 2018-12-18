@@ -10,13 +10,12 @@ import DrawerScreen from './src/components/Drawer/DrawerScreen';
 
 
 const AppDrawerNavigator = createDrawerNavigator({
-  login: Login,
   splash: Splash,
   newOrder: NewOrder
 },
 {
   contentComponent: DrawerScreen,
-  initialRouteName: 'login',
+  initialRouteName: 'splash',
   drawerWidth: 300
 });
 
