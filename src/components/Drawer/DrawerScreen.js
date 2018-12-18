@@ -27,6 +27,11 @@ class DrawerScreen extends Component {
                Splash
               </Text>
             </View>
+            <View style={styles.menuItem}>
+              <Text onPress={this.navigateToScreen('newOrder')}>
+               New Order
+              </Text>
+            </View>
           </View>
         </ScrollView>
       </SafeAreaView>

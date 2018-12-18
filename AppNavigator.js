@@ -12,44 +12,55 @@ const MenuImage = ({navigation}) => {
         return <Image source={require('./src/images/menu-button.png')}
                       style={styles.menu}/>
     }else{
-        return <Image source={require('./src/images/menu-button.png')}/>
+        return <Image source={require('./src/images/menu-button.png')}
+                      style={styles.menu}/>
     }
 }
 
 
 const AppNavigator = createStackNavigator({
   AppDrawerNavigator:{
-       screen: AppDrawerNavigator
+       screen: AppDrawerNavigator,
+       navigationOptions: ({ navigation }) => ({
+         headerLeft:
+         <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+             <MenuImage style="styles.bar" navigation={navigation}/>
+         </TouchableOpacity>,
+         headerStyle: {
+             backgroundColor: '#e74c3c',
+         },
+         headerTintColor: '#c0392b'
+       })
    },
-  login:{
-    screen: Login,
+  // login:{
+  //   screen: Login
+  // },
+  // splash:{
+  //   screen: Splash,
+  //   navigationOptions: () => ({
+  //     headerTitle: 'Splash',
+  //     headerStyle: {
+  //     backgroundColor: "#a13547",
+  //     elevation: 0,
+  //     shadowOpacity: 0,
+  //     borderBottomWidth: 0
+  //   },
+  //   headerTintColor: "#cccccc"
+  //     }),
+  // },
+},
+{
+    // initialRouteName: 'AppDrawerNavigator',
     navigationOptions: ({ navigation }) => ({
       headerLeft:
       <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
           <MenuImage style="styles.bar" navigation={navigation}/>
       </TouchableOpacity>,
       headerStyle: {
-          backgroundColor: '#333',
+          backgroundColor: '#e74c3c',
       },
-      headerTintColor: '#fff'
+      headerTintColor: '#c0392b'
     })
-  },
-  splash:{
-    screen: Splash,
-    navigationOptions: () => ({
-      headerTitle: 'Splash',
-      headerStyle: {
-      backgroundColor: "#a13547",
-      elevation: 0,
-      shadowOpacity: 0,
-      borderBottomWidth: 0
-    },
-    headerTintColor: "#cccccc"
-      }),
-  },
-},
-{
-    initialRouteName: 'AppDrawerNavigator',
 }
 );
 

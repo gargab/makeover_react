@@ -4,13 +4,15 @@ import React, {Component} from 'react';
 
 import Splash from './Splash';
 import Login from './src/components/Login/Login';
+import NewOrder from './src/components/NewOrder/NewOrder';
 import DrawerScreen from './src/components/Drawer/DrawerScreen';
 
 
 
 const AppDrawerNavigator = createDrawerNavigator({
   login: Login,
-  splash: Splash
+  splash: Splash,
+  newOrder: NewOrder
 },
 {
   contentComponent: DrawerScreen,
