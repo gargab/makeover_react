@@ -72,7 +72,7 @@ export default AppNavigator;
 const styles=StyleSheet.create({
 
   menu:{
-       height:10,
-       width:10
+       height:100,
+       width:100
    }
 });

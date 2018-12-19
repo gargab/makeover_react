@@ -15,8 +15,8 @@ import { SearchList, contains } from "./SearchList";
 import _ from "lodash";
 
 
-const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0
-
+const keyboardVerticalOffset = Platform.OS === 'ios' ? 50 : 0
+const behaviourstr = Platform.OS === 'ios' ? 'padding' : ''
 class NewOrder extends Component {
   constructor(props) {
     super(props);
@@ -94,7 +94,7 @@ class NewOrder extends Component {
   render() {
     return (
       <SafeAreaView>
-      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={keyboardVerticalOffset}>
+      <KeyboardAvoidingView behavior=behaviourstr keyboardVerticalOffset={keyboardVerticalOffset}>
         <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
           <FlatList
             data={this.state.data}
