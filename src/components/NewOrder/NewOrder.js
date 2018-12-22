@@ -13,6 +13,8 @@ import {
 import { List, ListItem, SearchBar } from "react-native-elements";
 import { SearchList, contains } from "./SearchList";
 import _ from "lodash";
+import { readData } from '../../services/DataReader';
+
 
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 50 : 0
@@ -45,6 +47,7 @@ class NewOrder extends Component {
       }
 
   makeRemoteRequest = () => {
+    readData().then((res) => {});
     this.setState({ loading: true });
 
     SearchList()

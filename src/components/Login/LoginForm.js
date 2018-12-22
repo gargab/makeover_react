@@ -6,7 +6,7 @@ export default class LoginForm extends Component{
 
   handleLogin = () => {
     //console.log(this.props)
-    this.props.navigation.navigate('splash')
+    this.props.navigation.navigate('otp')
   }
   render(){
     return (
@@ -19,15 +19,7 @@ export default class LoginForm extends Component{
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.input}/>
-        <TextInput
-        placeholder="Password"
-        placeholderTextColor='rgba(255,255,255,0.7)'
-        secureTextEntry
-        autoCapitalize="none"
-        autoCorrect={false}
-        returnKeyType="go"
-        ref={(input) => this.passwordInput = input}
-        style={styles.input}/>
+
         <TouchableOpacity
         style={styles.buttonContainer}
         onPress={this.handleLogin}

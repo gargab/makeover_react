@@ -5,12 +5,13 @@ import LoginForm from './LoginForm'
 
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0
+const behaviourstr = Platform.OS === 'ios' ? 'padding' : ''
 
 export default class Login extends Component{
 
   render(){
     return (
-      <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={keyboardVerticalOffset} style={styles.container}>
+      <KeyboardAvoidingView behavior={behaviourstr} keyboardVerticalOffset={keyboardVerticalOffset} style={styles.container}>
         <View style={styles.container}>
           <StatusBar
             barStyle='light-content'
