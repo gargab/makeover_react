@@ -6,12 +6,17 @@ import Splash from './Splash';
 import Login from './src/components/Login/Login';
 import NewOrder from './src/components/NewOrder/NewOrder';
 import DrawerScreen from './src/components/Drawer/DrawerScreen';
-
+import NewCustomer from './src/components/NewOrder/NewCustomer';
+import ListOrder from './src/components/NewOrder/ListOrder';
+import AddItems from './src/components/NewOrder/AddItems';
 
 
 const AppDrawerNavigator = createDrawerNavigator({
   splash: Splash,
-  newOrder: NewOrder
+  newOrder: NewOrder,
+  newCustomer: NewCustomer,
+  listOrder: ListOrder,
+  addItems:AddItems
 },
 {
   contentComponent: DrawerScreen,

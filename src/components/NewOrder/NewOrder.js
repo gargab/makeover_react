@@ -34,6 +34,16 @@ class NewOrder extends Component {
     this.makeRemoteRequest();
   }
 
+  newCustomer = () => {
+      //console.log(this.props)
+      this.props.navigation.navigate('newCustomer')
+    }
+
+    listOrder = () => {
+        //console.log(this.props)
+        this.props.navigation.navigate('listOrder')
+      }
+
   makeRemoteRequest = () => {
     this.setState({ loading: true });
 
@@ -94,29 +104,30 @@ class NewOrder extends Component {
   render() {
     return (
       <SafeAreaView>
-      <KeyboardAvoidingView behavior=behaviourstr keyboardVerticalOffset={keyboardVerticalOffset}>
-        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-          <FlatList
-            data={this.state.data}
-            renderItem={({ item }) => (
-              <ListItem
-                roundAvatar
-                title={`${item.name.first} ${item.name.last}`}
-                subtitle={item.email}
-                avatar={{ uri: item.picture.thumbnail }}
-                containerStyle={{ borderBottomWidth: 0 }}
-              />
-            )}
-            keyExtractor={item => item.email}
-            ItemSeparatorComponent={this.renderSeparator}
-            ListHeaderComponent={this.renderHeader}
-            ListFooterComponent={this.renderFooter}
-          />
-        </List>
-        <TouchableOpacity onPress={() => alert('FAB clicked')} style={styles.fab}>
-          <Text style={styles.fabIcon}>+</Text>
-        </TouchableOpacity>
-        </KeyboardAvoidingView >
+      <View >
+          <List style={styles.list} containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height:'100%' }}>
+            <FlatList
+              data={this.state.data}
+              renderItem={({ item }) => (
+                <ListItem
+                  roundAvatar
+                  title={`${item.name.first} ${item.name.last}`}
+                  subtitle={item.email}
+                  avatar={{ uri: item.picture.thumbnail }}
+                  containerStyle={{ borderBottomWidth: 0 }}
+                  onPress={this.listOrder}
+                />
+              )}
+              keyExtractor={item => item.email}
+              ItemSeparatorComponent={this.renderSeparator}
+              ListHeaderComponent={this.renderHeader}
+              ListFooterComponent={this.renderFooter}
+            />
+          </List>
+          <TouchableOpacity onPress={this.newCustomer} style={styles.fab}>
+            <Text style={styles.fabIcon}>+</Text>
+          </TouchableOpacity>
+        </View >
       </SafeAreaView>
     );
   }
