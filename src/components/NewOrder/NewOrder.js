@@ -10,9 +10,11 @@ import {
   StyleSheet,
   TouchableOpacity
 } from "react-native";
-import { List, ListItem, SearchBar } from "react-native-elements";
-import { SearchList, contains } from "./SearchList";
+import { List, ListItem, SearchBar, Avatar } from "react-native-elements";
+import { contains } from "./SearchList";
 import _ from "lodash";
+import { getData } from '../../services/GetData';
+import { retrieveData } from '../../services/GetLocal';
 
 
 
@@ -31,7 +33,7 @@ class NewOrder extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     this.makeRemoteRequest();
   }
 
@@ -45,21 +47,31 @@ class NewOrder extends Component {
         this.props.navigation.navigate('listOrder')
       }
 
-  makeRemoteRequest = () => {
+  makeRemoteRequest = async () => {
     //readData().then((res) => {});
     this.setState({ loading: true });
 
-    SearchList()
-      .then(List => {
+
+    var resultMap = await retrieveData(['phone_number','token']);
+
+    var phone_number = resultMap['phone_number'];
+    var queryData = {token : resultMap['token'] };
+    var path = phone_number + '/' + 'customer';
+    getData(path,queryData).then((res)=>{
+      if(res[0] == 200){
         this.setState({
           loading: false,
-          data: List,
-          fullData: List
-        });
-      })
-      .catch(error => {
-        this.setState({ error, loading: false });
-      });
+          data: res[1],
+          fullData: res[1]
+        })
+
+      }
+      else{
+        Toast.show(res[1].data, Toast.LONG);
+      }
+    });
+
+
   };
 
   handleSearch = (text) => {
@@ -107,20 +119,24 @@ class NewOrder extends Component {
     return (
       <SafeAreaView>
       <View >
-          <List style={styles.list} containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height:'100%' }}>
+          <List style={styles.list} containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height:'98%' }}>
             <FlatList
               data={this.state.data}
               renderItem={({ item }) => (
                 <ListItem
                   roundAvatar
-                  title={`${item.name.first} ${item.name.last}`}
-                  subtitle={item.email}
-                  avatar={{ uri: item.picture.thumbnail }}
+                  title={`${item.name}`}
+                  avatar=<Avatar
+                  rounded
+                  size="medium"
+                  title={item.name[0]}
+                  />
+                  subtitle={item.phone_number}
                   containerStyle={{ borderBottomWidth: 0 }}
                   onPress={this.listOrder}
                 />
               )}
-              keyExtractor={item => item.email}
+              keyExtractor={item => item.phone_number}
               ItemSeparatorComponent={this.renderSeparator}
               ListHeaderComponent={this.renderHeader}
               ListFooterComponent={this.renderFooter}

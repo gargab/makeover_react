@@ -3,16 +3,18 @@ import React, {Component} from 'react';
 import {View,Text,StyleSheet,Platform,TouchableOpacity,Image,StatusBar} from 'react-native';
 
 import AppNavigator from './AppNavigator';
-import LoginNavigator from './LoginNavigator'
+import LoginNavigator from './LoginNavigator';
+import InitialScreen from './src/components/Login/InitialScreen';
 
 
 const MainNavigator = createStackNavigator({
+  initialScreen: {screen: InitialScreen},
   loginnavigator: { screen: LoginNavigator },
   appnavigator: { screen: AppNavigator }
 }, {
-  // Default config for all screens
   headerMode: 'none',
-  initialRouteName: 'loginnavigator'
-})
+  initialRouteName: 'initialScreen'
+});
+
 
 export default MainNavigator;

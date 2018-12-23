@@ -6,7 +6,7 @@ export const retrieveData = async (key) => {
 
     for(i=0;i<key.length;i++){
       const value = await AsyncStorage.getItem(key[i]);
-      resultMap[key] = value;
+      resultMap[key[i]] = value;
     }
 
     return resultMap;

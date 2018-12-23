@@ -3,6 +3,7 @@ import {View, Keyboard, Text, StyleSheet, Image, KeyboardAvoidingView, StatusBar
 
 import { getData } from '../../services/GetData';
 import { retrieveData } from '../../services/GetLocal';
+import { storeData } from '../../services/StoreLocal';
 import Toast from 'react-native-simple-toast';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0
@@ -26,15 +27,17 @@ export default class OtpValidator extends Component{
     requestData['phone_number'] =  resultMap['phone_number'];
     getData('login',requestData).then((res)=>{
       if(res[0] == 200){
-        //await storeData(this.state);
-      this.props.navigation.navigate('splash');
+        storeData(res[1]).then(() =>
+        {
+          console.log(retrieveData(['phone_number','token']));
+          this.props.navigation.navigate('splash');
+        });
       }
       else{
         Toast.show('Invalid Otp', Toast.LONG);
       }
     });
 
-    //console.log(s.otp);
 
   }
 

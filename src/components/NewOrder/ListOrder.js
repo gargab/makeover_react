@@ -60,11 +60,35 @@ export default class ListOrder extends Component {
       );
     };
 
+    renderHeader = () => {
+      return (
+        <View style={{
+          flex: 1,
+          flexDirection:'column',
+          height: 40,
+          marginLeft:"5%",
+          marginRight:"5%"
+        }}>
+          <View style={{
+                      flex: 1,
+                      flexDirection:'row',
+                      justifyContent:'space-between'
+
+          }}>
+            <Text style={styles.flatListItem}>Category</Text>
+            <Text style={styles.flatListItem}>Brand</Text>
+            <Text style={styles.flatListItem}>Shade</Text>
+            <Text style={styles.flatListItem}>Qty</Text>
+          </View>
+        </View>
+      );
+    };
+
     render() {
       return (
         <SafeAreaView>
         <View >
-          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height: "100%" }}>
+          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height: "98%" }}>
             <FlatList
               data={this.flatListData}
               renderItem={({ item, index}) => (
@@ -73,6 +97,7 @@ export default class ListOrder extends Component {
                 </OrderItem>
               )}
               ItemSeparatorComponent={this.renderSeparator}
+              ListHeaderComponent={this.renderHeader}
             />
           </List>
           <TouchableOpacity onPress={this.onPressAdd} style={styles.fab}>
