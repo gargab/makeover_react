@@ -1,12 +1,36 @@
 import React, {Component} from 'react';
-import {View, TextInput, StyleSheet, TouchableOpacity, Text, StatusBar} from 'react-native'
+import {View, Keyboard, TextInput, StyleSheet, TouchableOpacity, Text, StatusBar} from 'react-native'
+
+import { postData } from '../../services/PostData';
+import { storeData } from '../../services/StoreLocal';
+import Toast from 'react-native-simple-toast';
+import { AsyncStorage } from "react-native"
 
 export default class LoginForm extends Component{
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      phone_number : ''
+    };
+  }
 
-  handleLogin = () => {
-    //console.log(this.props)
-    this.props.navigation.navigate('otp')
+  handleLogin = async () => {
+    Keyboard.dismiss();
+    postData('login',this.state).then((res) => {
+
+      if(res[0] == 200){
+        storeData(this.state).then(() =>
+        {
+          this.props.navigation.navigate('otp');
+        });
+
+      }
+      else{
+        Toast.show('Number Not Registered', Toast.LONG);
+      }
+
+    });
   }
   render(){
     return (
@@ -15,9 +39,9 @@ export default class LoginForm extends Component{
           placeholder="Phone No."
           placeholderTextColor='rgba(255,255,255,0.7)'
           returnKeyType="next"
-          onSubmitEditing={() => this.passwordInput.focus()}
           autoCapitalize="none"
           autoCorrect={false}
+          onChangeText={(text) => this.setState({phone_number : text})}
           style={styles.input}/>
 
         <TouchableOpacity

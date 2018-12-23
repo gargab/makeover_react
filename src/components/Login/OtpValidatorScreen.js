@@ -1,26 +1,46 @@
 import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, KeyboardAvoidingView, StatusBar, Platform,TextInput,TouchableOpacity} from 'react-native'
+import {View, Keyboard, Text, StyleSheet, Image, KeyboardAvoidingView, StatusBar, Platform,TextInput,TouchableOpacity} from 'react-native'
 
+import { getData } from '../../services/GetData';
+import { retrieveData } from '../../services/GetLocal';
+import Toast from 'react-native-simple-toast';
 
 const keyboardVerticalOffset = Platform.OS === 'ios' ? 100 : 0
+const behaviourstr = Platform.OS === 'ios' ? 'padding' : ''
 
 export default class OtpValidator extends Component{
 
   constructor(props) {
     super(props);
-    this.state = {otp: '',bb:'ffff'};
+    this.state = {token: '',
+  };
   }
 
-  handleLogin = () => {
+  handleOtp = async () => {
+    Keyboard.dismiss();
+    var resultMap = await retrieveData(['phone_number']);
 
-    let s = this.state;
-    console.log(s.otp);
-    this.props.navigation.navigate('splash');
+
+    var requestData = {}
+    requestData['token'] = this.state.token;
+    requestData['phone_number'] =  resultMap['phone_number'];
+    getData('login',requestData).then((res)=>{
+      if(res[0] == 200){
+        //await storeData(this.state);
+      this.props.navigation.navigate('splash');
+      }
+      else{
+        Toast.show('Invalid Otp', Toast.LONG);
+      }
+    });
+
+    //console.log(s.otp);
+
   }
 
 render(){
   return (
-    <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={keyboardVerticalOffset} style={styles.container}>
+    <KeyboardAvoidingView behavior={behaviourstr} keyboardVerticalOffset={keyboardVerticalOffset} style={styles.container}>
       <View style={styles.container}>
         <StatusBar
           barStyle='light-content'
@@ -40,11 +60,11 @@ render(){
         autoCapitalize="none"
         autoCorrect={false}
         returnKeyType="go"
-        onChangeText={(text) => this.setState({otp : text})}
+        onChangeText={(text) => this.setState({token : text})}
         style={styles.input}/>
         <TouchableOpacity
         style={styles.buttonContainer}
-        onPress={this.handleLogin}
+        onPress={this.handleOtp}
         >
           <Text style={styles.buttonText}>
             LOGIN

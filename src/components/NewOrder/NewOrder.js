@@ -13,7 +13,6 @@ import {
 import { List, ListItem, SearchBar } from "react-native-elements";
 import { SearchList, contains } from "./SearchList";
 import _ from "lodash";
-import { readData } from '../../services/DataReader';
 
 
 
@@ -47,7 +46,7 @@ class NewOrder extends Component {
       }
 
   makeRemoteRequest = () => {
-    readData().then((res) => {});
+    //readData().then((res) => {});
     this.setState({ loading: true });
 
     SearchList()
