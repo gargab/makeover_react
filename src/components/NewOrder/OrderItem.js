@@ -20,11 +20,14 @@ class OrderItem extends Component {
                 }
             },
             onOpen: (secId, rowId, direction) => {
-                this.setState({ activeRowKey: this.props.item.key });
+
+                var deletedKey = this.props.item.brand + '_' + this.props.item.category + '_' + this.props.item.shade;
+
+                this.setState({ activeRowKey: deletedKey });
             },
             right: [
                 {
-                    onPress: () => {
+                    onPress: (abc) => {
                         const deletingRow = this.state.activeRowKey;
                         Alert.alert(
                             'Alert',
@@ -33,8 +36,6 @@ class OrderItem extends Component {
                               {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
                               {text: 'Yes', onPress: () => {
 
-                                this.props.parentFlatList.flatListData.splice(this.props.index, 1);
-                                //Refresh FlatList !
                                 this.props.parentFlatList.refreshFlatList(deletingRow);
                               }},
                             ],
@@ -56,10 +57,13 @@ class OrderItem extends Component {
               }}>
                 <View style={{
                             flex: 1,
-                            flexDirection:'row'
+                            flexDirection:'row',
+                            justifyContent:'space-between'
                 }}>
-                  <Text style={styles.flatListItem}>{this.props.item.name}</Text>
-                  <Text style={styles.flatListItem}>{this.props.item.foodDescription}</Text>
+                  <Text style={styles.flatListItem}>{this.props.item.brand}</Text>
+                  <Text style={styles.flatListItem}>{this.props.item.category}</Text>
+                  <Text style={styles.flatListItem}>{this.props.item.shade}</Text>
+                  <Text style={styles.flatListItem}>{this.props.item.qty}</Text>
                 </View>
               </View>
             </Swipeout>

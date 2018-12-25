@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, TouchableOpacity, SafeAreaView } from 'react-native';
 import Swipeout from 'react-native-swipeout';
 import { List } from "react-native-elements";
+import Toast from 'react-native-simple-toast';
+
+import { postData } from '../../services/PostData';
+import { retrieveData } from '../../services/GetLocal';
 
 import OrderItem from './OrderItem'
 //import flatListData from '../../Data/dummyData'
@@ -9,42 +13,91 @@ import OrderItem from './OrderItem'
 export default class ListOrder extends Component {
 
 
-  flatListData = [
-      {
-          "key": "598a678278fee204ee51cd2c",
-          "name": "Cream Tea",
-          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Cornish_cream_tea_2.jpg",
-          "foodDescription": "This is a cup of cream tea"
-      },
-      {
-          "key": "598a684f78fee204ee51cd2f",
-          "name": "Fresh mushroom",
-          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/6e/Lactarius_indigo_48568.jpg",
-          "foodDescription": "Fresh mushroom with vegetables. This is a long line, this is a long line, this is a long line,this is a long line,this is a long line"
-      },
-      {
-          "key": "598a687678fee204ee51cd30",
-          "name": "Japanese Oyster",
-          "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/d/d2/Oysters_served_on_ice%2C_with_lemon_and_parsley.jpg",
-          "foodDescription": "Oysters with ice rock"
-      }];
-
     constructor(props) {
         super(props);
         this.state = ({
             deletedRowKey: null,
-            data:[]
+            orderList : [],
+            orderMap : {},
+            isNavigation : true
         });
     }
+
     refreshFlatList = (deletedKey) => {
-        this.setState((prevState) => {
-            return {
-                deletedRowKey: deletedKey
-            };
-        });
+        var orderMap = this.state.orderMap;
+        delete orderMap[deletedKey];
+        this.populateOrders(orderMap);
     }
+
+    submit = async () =>{
+      var resultMap = await retrieveData(['phone_number','token']);
+      var phone_number = resultMap['phone_number'];
+
+      var path = phone_number + '/' + 'order';
+      var id  = this.props.navigation.getParam('id', null);
+      var queryData = {"token" : resultMap['token'],
+      "customer_id" : id,
+      "orderMap" : this.state.orderMap
+     }
+     postData(path,queryData).then((res)=>{
+       if(res[0] == 200){
+       Toast.show("Order Posted", Toast.LONG);
+       this.populateOrders({});
+       this.props.navigation.navigate('splash');
+       }
+       else{
+         Toast.show(res[1].data, Toast.LONG);
+       }
+     });
+    }
+
     onPressAdd = () => {
-        this.props.navigation.navigate('addItems');
+        this.setState({
+          isNavigation : true
+        });
+        this.props.navigation.navigate('addItems',{
+          "reference" : this});
+    }
+
+    populateOrders = (orderMap) => {
+
+      var orderList = [];
+
+      for(key in orderMap){
+
+        var combinationArray = key.split("_");
+        var obj = {
+          "brand" : combinationArray[0],
+          "category" : combinationArray[1],
+          "shade" : combinationArray[2],
+          "qty" : orderMap[key]
+        }
+
+        orderList.push(obj);
+
+      }
+
+      this.setState({
+        orderList : orderList,
+        orderMap : orderMap
+      });
+
+    }
+
+    aggregateOrders = (retOrderMap) => {
+      var orderMap = this.state.orderMap;
+
+      for( key in retOrderMap){
+        if(key in orderMap){
+          orderMap[key] = orderMap[key] + retOrderMap[key];
+        }
+        else{
+          orderMap[key] = retOrderMap[key];
+        }
+
+      }
+      this.populateOrders(orderMap);
+
     }
 
     renderSeparator = () => {
@@ -75,8 +128,8 @@ export default class ListOrder extends Component {
                       justifyContent:'space-between'
 
           }}>
-            <Text style={styles.flatListItem}>Category</Text>
             <Text style={styles.flatListItem}>Brand</Text>
+            <Text style={styles.flatListItem}>Category</Text>
             <Text style={styles.flatListItem}>Shade</Text>
             <Text style={styles.flatListItem}>Qty</Text>
           </View>
@@ -88,9 +141,9 @@ export default class ListOrder extends Component {
       return (
         <SafeAreaView>
         <View >
-          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height: "98%" }}>
+          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height: "100%" }}>
             <FlatList
-              data={this.flatListData}
+              data={this.state.orderList}
               renderItem={({ item, index}) => (
                 <OrderItem item={item} index={index} parentFlatList={this}>
 
@@ -99,10 +152,19 @@ export default class ListOrder extends Component {
               ItemSeparatorComponent={this.renderSeparator}
               ListHeaderComponent={this.renderHeader}
             />
+            <TouchableOpacity
+            style={styles.buttonContainer}
+            onPress={this.submit}
+            >
+              <Text style={styles.buttonText}>
+                SUBMIT
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.onPressAdd} style={styles.fab}>
+              <Text style={styles.fabIcon}>+</Text>
+            </TouchableOpacity>
           </List>
-          <TouchableOpacity onPress={this.onPressAdd} style={styles.fab}>
-            <Text style={styles.fabIcon}>+</Text>
-          </TouchableOpacity>
+
           </View >
         </SafeAreaView>
       );
@@ -127,5 +189,11 @@ const styles = StyleSheet.create({
       fabIcon: {
         fontSize: 30,
         color: 'white'
-      }
+      },
+      buttonContainer:{
+        backgroundColor:'#2980b9',
+        paddingVertical: 15,
+        marginTop: "5%",
+        marginBottom: "5%"
+      },
 });
