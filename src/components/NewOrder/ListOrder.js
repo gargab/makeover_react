@@ -104,10 +104,7 @@ export default class ListOrder extends Component {
       return (
         <View
           style={{
-            height: 1,
-            width: "86%",
-            backgroundColor: "#CED0CE",
-            marginLeft: "14%"
+            backgroundColor: "#CED0CE"
           }}
         />
       );
@@ -141,7 +138,7 @@ export default class ListOrder extends Component {
       return (
         <SafeAreaView>
         <View >
-          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height: "100%" }}>
+          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
               data={this.state.orderList}
               renderItem={({ item, index}) => (

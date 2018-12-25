@@ -27,7 +27,7 @@ const AppNavigator = createStackNavigator({
              <MenuImage style="styles.bar" navigation={navigation}/>
          </TouchableOpacity>,
          headerStyle: {
-             backgroundColor: '#e74c3c',
+             backgroundColor: '#000000',
          },
          headerTintColor: '#c0392b'
        })
@@ -57,7 +57,7 @@ const AppNavigator = createStackNavigator({
           <MenuImage style="styles.bar" navigation={navigation}/>
       </TouchableOpacity>,
       headerStyle: {
-          backgroundColor: '#e74c3c',
+          backgroundColor: '#000',
       },
       headerTintColor: '#c0392b'
     })

@@ -170,7 +170,7 @@ componentDidUpdate(prevProps){
   var navigation  = this.props.navigation;
   var referenceObj = navigation.getParam('reference', null);
   if(referenceObj.state.isNavigation == true){
-    this.state.orderMap = [];
+    this.state.orderMap = {};
     referenceObj.state.isNavigation = false;
   }
 
