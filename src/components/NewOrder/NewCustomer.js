@@ -55,6 +55,7 @@ class NewCustomer extends Component {
               onChangeText={(text) => this.setState({name : text})}
               returnKeyType='next'
               label='Name'
+              selectionColor='#000000'
             />
 
             <TextField
@@ -63,6 +64,7 @@ class NewCustomer extends Component {
               onChangeText={(text) => this.setState({address :  text})}
               returnKeyType='next'
               label='Address'
+              selectionColor='#000000'
             />
 
             <TextField
@@ -70,7 +72,9 @@ class NewCustomer extends Component {
               returnKeyType='next'
               onChangeText={(text) => this.setState({phone_number : text})}
               label='Phone No.'
-              characterRestriction={15}
+              characterRestriction={12}
+              selectionColor='#000000'
+              textContentType='telephoneNumber'
             />
 
           </View>
@@ -94,7 +98,7 @@ export default NewCustomer;
 
 const styles = StyleSheet.create({
   scroll: {
-    backgroundColor: '#E8EAF6',
+    backgroundColor: '#FFFFFF',
   },
 
   container: {
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   buttonContainer:{
-    backgroundColor:'#2980b9',
+    backgroundColor:'#000000',
     paddingVertical: 15
   },
   buttonText:{

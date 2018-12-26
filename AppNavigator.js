@@ -9,10 +9,10 @@ import AppDrawerNavigator from './AppDrawerNavigator'
 
 const MenuImage = ({navigation}) => {
     if(!navigation.state.isDrawerOpen){
-        return <Image source={require('./src/images/menu-button.png')}
+        return <Image source={require('./src/images/menu-button-white.png')}
                       style={styles.menu}/>
     }else{
-        return <Image source={require('./src/images/menu-button.png')}
+        return <Image source={require('./src/images/menu-button-white.png')}
                       style={styles.menu}/>
     }
 }
@@ -72,7 +72,7 @@ export default AppNavigator;
 const styles=StyleSheet.create({
 
   menu:{
-       height:50 ,
-       width:50
+       height:20 ,
+       width:30
    }
 });

@@ -9,9 +9,7 @@ import DrawerScreen from './src/components/Drawer/DrawerScreen';
 import NewCustomer from './src/components/NewOrder/NewCustomer';
 import ListOrder from './src/components/NewOrder/ListOrder';
 import AddItems from './src/components/NewOrder/AddItems';
-
-
-
+import ViewOrders from './src/components/ViewOrders/ViewOrders';
 
 
 const AppDrawerNavigator = createDrawerNavigator({
@@ -19,7 +17,8 @@ const AppDrawerNavigator = createDrawerNavigator({
   newOrder: NewOrder,
   newCustomer: NewCustomer,
   listOrder: ListOrder,
-  addItems:AddItems
+  addItems:AddItems,
+  viewOrders: ViewOrders
 },
 {
   contentComponent: DrawerScreen,

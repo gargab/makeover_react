@@ -42,6 +42,12 @@ class DrawerScreen extends Component {
             </View>
 
             <View style={styles.menuItem}>
+              <Text onPress={this.navigateToScreen('viewOrders')}>
+                View Orders
+              </Text>
+            </View>
+
+            <View style={styles.menuItem}>
               <Text onPress={this.logout}>
                 Logout
               </Text>

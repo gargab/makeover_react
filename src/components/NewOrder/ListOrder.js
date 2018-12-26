@@ -3,6 +3,7 @@ import { AppRegistry, FlatList, StyleSheet, Text, View, Image, Alert, Platform, 
 import Swipeout from 'react-native-swipeout';
 import { List } from "react-native-elements";
 import Toast from 'react-native-simple-toast';
+import { FloatingAction } from 'react-native-floating-action';
 
 import { postData } from '../../services/PostData';
 import { retrieveData } from '../../services/GetLocal';
@@ -11,7 +12,6 @@ import OrderItem from './OrderItem'
 //import flatListData from '../../Data/dummyData'
 
 export default class ListOrder extends Component {
-
 
     constructor(props) {
         super(props);
@@ -22,6 +22,20 @@ export default class ListOrder extends Component {
             isNavigation : true
         });
     }
+
+  actions = [{
+    text: 'New Item',
+    icon: require('../../images/new_item_white.png'),
+    name: 'bt_newItem',
+    position: 1,
+    color: '#000000'
+  }, {
+    text: 'Submit',
+    icon: require('../../images/submit_white.png'),
+    name: 'bt_submit',
+    position: 2,
+    color: '#000000'
+  }];
 
     refreshFlatList = (deletedKey) => {
         var orderMap = this.state.orderMap;
@@ -112,12 +126,14 @@ export default class ListOrder extends Component {
 
     renderHeader = () => {
       return (
+        <View style={{borderBottomWidth: 1}}>
         <View style={{
           flex: 1,
           flexDirection:'column',
           height: 40,
           marginLeft:"5%",
-          marginRight:"5%"
+          marginRight:"5%",
+          marginTop:"5%"
         }}>
           <View style={{
                       flex: 1,
@@ -131,6 +147,7 @@ export default class ListOrder extends Component {
             <Text style={styles.flatListItem}>Qty</Text>
           </View>
         </View>
+        </View>
       );
     };
 
@@ -138,8 +155,8 @@ export default class ListOrder extends Component {
       return (
         <SafeAreaView>
         <View >
-          <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
             <FlatList
+            style={{height: '100%' }}
               data={this.state.orderList}
               renderItem={({ item, index}) => (
                 <OrderItem item={item} index={index} parentFlatList={this}>
@@ -149,19 +166,21 @@ export default class ListOrder extends Component {
               ItemSeparatorComponent={this.renderSeparator}
               ListHeaderComponent={this.renderHeader}
             />
-            <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={this.submit}
-            >
-              <Text style={styles.buttonText}>
-                SUBMIT
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.onPressAdd} style={styles.fab}>
-              <Text style={styles.fabIcon}>+</Text>
-            </TouchableOpacity>
-          </List>
-
+          <FloatingAction
+            style={styles.floatingButton}
+            color='#000000'
+            actions={this.actions}
+            onPressItem={
+              (name) => {
+                if (name == 'bt_newItem'){
+                  this.onPressAdd()
+                }
+                else{
+                  this.submit()
+                }
+              }
+            }
+          />
           </View >
         </SafeAreaView>
       );
@@ -193,4 +212,9 @@ const styles = StyleSheet.create({
         marginTop: "5%",
         marginBottom: "5%"
       },
+      floatingButton:{
+        position: 'absolute',
+        bottom:0,
+        left:0
+      }
 });

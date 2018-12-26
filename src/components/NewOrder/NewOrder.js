@@ -93,7 +93,7 @@ renderSeparator = () => {
 };
 
 renderHeader = () => {
-  return <SearchBar placeholder="Type Here..." lightTheme round onChangeText={this.handleSearch} />;
+  return <SearchBar placeholder="Search Name, Phone or Address ..." lightTheme inputStyle={{backgroundColor: '#FFFFFF'}} containerStyle={{backgroundColor: '#000000'}} round onChangeText={this.handleSearch} />;
 };
 
 renderFooter = () => {
@@ -116,9 +116,9 @@ render() {
   return (
     <SafeAreaView>
     <View >
-        <List style={styles.list} containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0, height:'98%' }}>
           <FlatList
             data={this.state.data}
+            style={{height:"100%"}}
             renderItem={({ item }) => (
               <ListItem
                 roundAvatar
@@ -127,6 +127,7 @@ render() {
                 rounded
                 size="medium"
                 title={item.name[0]}
+                containerStyle={{backgroundColor: '#000000'}}
                 />
                 subtitle={item.phone_number}
                 containerStyle={{ borderBottomWidth: 0 }}
@@ -138,7 +139,6 @@ render() {
             ListHeaderComponent={this.renderHeader}
             ListFooterComponent={this.renderFooter}
           />
-        </List>
         <TouchableOpacity onPress={this.newCustomer} style={styles.fab}>
           <Text style={styles.fabIcon}>+</Text>
         </TouchableOpacity>
@@ -157,7 +157,7 @@ fab: {
     justifyContent: 'center',
     right: 20,
     bottom: 20,
-    backgroundColor: '#03A9F4',
+    backgroundColor: '#000000',
     borderRadius: 30,
     elevation: 8,
     justifyContent: 'center',

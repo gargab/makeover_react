@@ -212,23 +212,30 @@ componentDidUpdate(prevProps){
               />
             </List>
 
-            <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={this.addOrder}
-            >
-              <Text style={styles.buttonText}>
-                Add Order
-              </Text>
-            </TouchableOpacity>
+            <View style={{
+                        flex: 1,
+                        flexDirection:'row',
+                        justifyContent:'center',
+                        marginTop: '10%'
+                      }}>
+              <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={this.addOrder}
+              >
+                <Text style={styles.buttonText}>
+                  ADD ORDER
+                </Text>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-            style={styles.buttonContainer}
-            onPress={this.goToList}
-            >
-              <Text style={styles.buttonText}>
-                SUBMIT
-              </Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+              style={styles.buttonContainer}
+              onPress={this.goToList}
+              >
+                <Text style={styles.buttonText}>
+                  SUBMIT
+                </Text>
+              </TouchableOpacity>
+            </View>
         </ScrollView>
 
 
@@ -250,17 +257,21 @@ const styles = StyleSheet.create({
   },
 
   contentContainer: {
-    padding: 8,
+    padding: 8
   },
   buttonContainer:{
-    backgroundColor:'#2980b9',
+    backgroundColor:'#000000',
     paddingVertical: 15,
-    marginTop: "5%",
-    marginBottom: "5%"
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    justifyContent: 'center',
+    marginLeft: '5%',
+    marginRight: '5%',
+
   },
   buttonText:{
     textAlign: 'center',
-    color:'#363636',
+    color:'#FFFFFF',
     fontWeight: "700"
   }
 });

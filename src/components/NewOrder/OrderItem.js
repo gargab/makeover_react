@@ -39,11 +39,11 @@ class OrderItem extends Component {
                           height :"100%"
                         }}
                     >
-                      <Image source={require('../../images/trash.png')} style={styles.menu}/>
+                      <Image source={require('../../images/trash_white.png')} style={styles.menu}/>
                     </View>
                   ),
-                  backgroundColor: "#FFFFFF",
-                  underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                  backgroundColor: "#000000",
+                  
                   onPress: () => {
                         const deletingRow = this.state.activeRowKey;
                         Alert.alert(
@@ -65,7 +65,7 @@ class OrderItem extends Component {
             sectionId: 1
         };
         return (
-            <Swipeout {...swipeSettings} style = {styles.row}>
+            <Swipeout {...swipeSettings} style = {Platform.OS === 'ios' ? styles.containerStyle : styles.row}>
 
               <View style={{
                 flex: 1,
@@ -98,15 +98,9 @@ const styles = StyleSheet.create({
         justifyContent : "center"
     },
   containerStyle: {
-       borderWidth: 1,
        borderRadius: 2,
        borderColor: '#ddd',
-       borderBottomWidth: 1,
-       shadowColor: '#000',
-       shadowOffset: { width: 0, height: 2 },
-       shadowOpacity: 0.8,
-       shadowRadius: 2,
-       elevation: 7,
+       borderBottomWidth: 2,
        marginLeft: 5,
        marginRight: 5,
        marginTop: 10,
@@ -128,7 +122,8 @@ const styles = StyleSheet.create({
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.8,
       shadowRadius: 2,
-      elevation: 7
+      elevation: 7,
+      zIndex:999
     },
     menu:{
          height:30 ,
