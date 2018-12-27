@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FlatList, AppRegistry, ScrollView, View, StyleSheet, TouchableOpacity, Text, Button} from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Dropdown } from 'react-native-material-dropdown';
-import { List } from "react-native-elements";
+import { List, Card } from "react-native-elements";
 import { getData } from '../../services/GetData';
 import { retrieveData } from '../../services/GetLocal';
 import Toast from 'react-native-simple-toast';
@@ -180,11 +180,14 @@ componentDidUpdate(prevProps){
   render () {
 
     return(
+      <View>
         <ScrollView
           style={styles.scroll}
-          contentContainerStyle={styles.contentContainer}
           keyboardShouldPersistTaps='always'
+          contentContainer={styles.contentContainer}
         >
+
+          <View style={{padding:'5%'}}>
 
             <Dropdown
               label='Brand'
@@ -199,8 +202,9 @@ componentDidUpdate(prevProps){
               onChangeText={this.CategoryChanged}
               value = {this.state.Category[0].value}
             />
+            </View>
 
-            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0}}>
+            <Card>
               <FlatList
                 data={this.state.item}
                 renderItem={({ item, index}) => (
@@ -210,8 +214,8 @@ componentDidUpdate(prevProps){
                 )}
                 ItemSeparatorComponent={this.renderSeparator}
               />
-            </List>
-
+              </Card>
+            </ScrollView>
             <View style={{
                         flex: 1,
                         flexDirection:'row',
@@ -236,7 +240,8 @@ componentDidUpdate(prevProps){
                 </Text>
               </TouchableOpacity>
             </View>
-        </ScrollView>
+
+        </View>
 
 
     );
@@ -249,29 +254,46 @@ export default AddItems;
 const styles = StyleSheet.create({
   scroll: {
     backgroundColor: '#FFFFFF',
+    height: '87%'
   },
-
+  contentContainer:{
+    padding: 8
+  },
   container: {
     margin: 8,
     marginTop: 24,
   },
-
-  contentContainer: {
-    padding: 8
-  },
   buttonContainer:{
     backgroundColor:'#000000',
-    paddingVertical: 15,
     paddingLeft: "5%",
     paddingRight: "5%",
     justifyContent: 'center',
     marginLeft: '5%',
     marginRight: '5%',
+    height: 40,
+    width: 155
 
   },
   buttonText:{
     textAlign: 'center',
     color:'#FFFFFF',
+    fontWeight: "700"
+  },
+  buttonContainerCompl:{
+    backgroundColor:'#FFFFFF',
+    paddingLeft: "5%",
+    paddingRight: "5%",
+    justifyContent: 'center',
+    marginLeft: '5%',
+    marginRight: '5%',
+    height: 40,
+    width: 155,
+    borderWidth: 2
+
+  },
+  buttonTextCompl:{
+    textAlign: 'center',
+    color:'#000000',
     fontWeight: "700"
   }
 });

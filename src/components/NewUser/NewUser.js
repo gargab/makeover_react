@@ -132,7 +132,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer:{
     backgroundColor:'#000000',
-    paddingVertical: 15,
+    height: 40,
+    justifyContent: 'center',
     marginTop: '5%'
   },
   buttonText:{
