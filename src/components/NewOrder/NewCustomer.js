@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { AppRegistry, Keyboard,ScrollView, View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 import { TextField } from 'react-native-material-textfield';
 import { Dropdown } from 'react-native-material-dropdown';
+import { Card } from "react-native-elements";
 
 import Toast from 'react-native-simple-toast';
 import { retrieveData } from '../../services/GetLocal';
@@ -48,7 +49,7 @@ class NewCustomer extends Component {
           contentContainerStyle={styles.contentContainer}
           keyboardShouldPersistTaps='handled'
         >
-          <View style={styles.container}>
+        <Card containerStyle={styles.container}>
             <TextField
               autoCorrect={false}
               enablesReturnKeyAutomatically={true}
@@ -77,9 +78,6 @@ class NewCustomer extends Component {
               textContentType='telephoneNumber'
             />
 
-          </View>
-
-
           <TouchableOpacity
           style={styles.buttonContainer}
           onPress={this.createCustomer}
@@ -88,6 +86,7 @@ class NewCustomer extends Component {
               SUBMIT
             </Text>
           </TouchableOpacity>
+        </Card>
         </ScrollView>
     );
   }
@@ -103,7 +102,7 @@ const styles = StyleSheet.create({
 
   container: {
     margin: 8,
-    marginTop: 24,
+    paddingTop: 0
   },
 
   contentContainer: {
