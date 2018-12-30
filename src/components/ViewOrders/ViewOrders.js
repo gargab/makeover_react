@@ -14,18 +14,23 @@ class ViewOrders extends Component {
     super(props);
 
     this.state = {
-      orders:[{
-        "id": 39675,
-        "customer_name": 'Sweet Selection',
-        "address":  'Shop No. 3, Khandke, NC Kelkar',
-        "timestamp": 'Dec 25 2018 3:28 PM',
-        "status":"Pending",
-        "agent_name": "Chunky Bansal",
-        "total": 150
-      }]
+      orders:[]
     };
   }
 
+
+  componentDidMount = async() =>{
+    retrieveData(['phone_number','token']).then((resultMap)=>{
+      var path = resultMap['phone_number'] + '/' + 'orders';
+
+      var queryData = {'token' : resultMap['token'] };
+      getData(path,queryData).then((res)=>{
+        this.setState({
+          orders : res[1]
+        })
+      });
+  });
+}
 
   renderSeparator = () => {
     return (
@@ -50,7 +55,7 @@ class ViewOrders extends Component {
               <FlatList
                 data={this.state.orders}
                 renderItem={({ item, index}) => (
-                  <ViewOrderItem item={item} index={index} parentFlatList={this}>
+                  <ViewOrderItem item={item} index={index} navigation={this.props.navigation} parentFlatList={this}>
 
                   </ViewOrderItem>
                 )}

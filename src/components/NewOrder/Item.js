@@ -27,8 +27,17 @@
                       justifyContent:'space-between'
           }}>
             <Text style={styles.flatListItem}>{this.props.item.name}</Text>
-            <NumericInput value={this.props.item.qty} onChange={value => {this.props.parentFlatList.updateQuantity(this.props.item.name,value)}} minValue = {0} totalWidth={80}
-              totalHeight={40}/>
+            <NumericInput value={this.props.item.qty} onChange={value => {this.props.parentFlatList.updateQuantity(this.props.item.name,value)}} minValue = {0}
+            totalWidth={240}
+            totalHeight={50}
+            iconSize={25}
+            step={1}
+            valueType='real'
+            rounded
+            textColor='#B0228C'
+            iconStyle={{ color: 'white' }}
+            rightButtonBackgroundColor='#EA3788'
+            leftButtonBackgroundColor='#E56B70'/>
           </View>
         </View>
       )

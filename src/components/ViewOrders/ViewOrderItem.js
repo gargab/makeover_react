@@ -14,18 +14,27 @@ class ViewOrderItem extends Component {
       };
   }
 
+  goToOrderDetails = () =>{
+    this.props.navigation.navigate('viewOrderDetails',{
+      id : this.props.item.id,
+      isNavigation : true
+    })
+  }
+
   render(){
+    var color = this.changeColor(this.props.item.status);
     return (
-      <TouchableOpacity>
+      <TouchableOpacity
+      onPress={this.goToOrderDetails}>
         <Card containerStyle={styles.outerContainer} flexDirection='row'>
 
             <View style={styles.dataContainer}>
-              <Text style={styles.heading}> {this.props.item.customer_name} </Text>
+              <Text style={[styles.heading, {borderLeftColor : color}]}> {this.props.item.customer_name} </Text>
               <Text style={styles.subheading}> {this.props.item.address} </Text>
               <Text style={styles.dateStyle}> {this.props.item.timestamp} </Text>
               <View style={styles.statusContainer}>
-                <Text style={styles.statusStyle}> {this.props.item.status} </Text>
-                <Text style={styles.agentStyle}> {this.props.item.agent_name} </Text>
+                <Text style={[styles.statusStyle,{color : color}]}> {this.props.item.status} </Text>
+                <Text style={[styles.agentStyle,{color : color}]}> {this.props.item.agent_name} </Text>
               </View>
             </View>
             <View style={styles.piecesContainer}>
@@ -38,7 +47,35 @@ class ViewOrderItem extends Component {
         </Card>
       </TouchableOpacity>
     )};
+
+    changeColor = (status) =>{
+      switch(status){
+        case 'Pending' :
+        return '#E06D01';
+        break;
+
+        case 'Cancelled' :
+        return '#FA1705';
+        break;
+
+        case 'Received' :
+        return '#DBEF09';
+        break;
+
+        case 'On Hold' :
+        return '#1518E1';
+        break;
+
+        case 'Processed' :
+        return '#05F530';
+        break;
+
+
+      }
+    };
 }
+
+
 
 export default ViewOrderItem;
 
@@ -47,7 +84,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection:'row',
     borderLeftWidth: 3,
-    borderLeftColor: '#f39c12',
     paddingRight: '2%',
     alignItems: 'flex-start'
   },
@@ -88,12 +124,10 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   statusStyle:{
-    fontSize: 18,
-    color: '#f39c12'
+    fontSize: 18
   },
   agentStyle:{
-    fontSize: 10,
-    color: '#f39c12'
+    fontSize: 10
   },
   piecesStyle:{
     fontSize: 18,

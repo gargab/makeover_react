@@ -44,12 +44,7 @@ export default class InitialScreen extends Component{
   }
 
 componentDidMount(){
-
   var val = this.checkStatus();
-
-
-
-
 }
 
 

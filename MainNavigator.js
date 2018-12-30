@@ -5,6 +5,7 @@ import {View,Text,StyleSheet,Platform,TouchableOpacity,Image,StatusBar} from 're
 import AppNavigator from './AppNavigator';
 import LoginNavigator from './LoginNavigator';
 import InitialScreen from './src/components/Login/InitialScreen';
+import ViewOrders from './src/components/ViewOrders/ViewOrders';
 
 
 const MainNavigator = createStackNavigator({

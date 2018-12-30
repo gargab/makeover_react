@@ -19,7 +19,8 @@ export default class ListOrder extends Component {
             deletedRowKey: null,
             orderList : [],
             orderMap : {},
-            isNavigation : true
+            isNavigation : true,
+            currentScreenName : 'listOrder'
         });
     }
 
@@ -47,7 +48,7 @@ export default class ListOrder extends Component {
       var resultMap = await retrieveData(['phone_number','token']);
       var phone_number = resultMap['phone_number'];
 
-      var path = phone_number + '/' + 'order';
+      var path = phone_number + '/' + 'orders';
       var id  = this.props.navigation.getParam('id', null);
       var queryData = {"token" : resultMap['token'],
       "customer_id" : id,

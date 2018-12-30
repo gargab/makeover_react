@@ -62,8 +62,13 @@ class AddItems extends Component {
     var navigation  = this.props.navigation;
     var referenceObj = navigation.getParam('reference', null);
     referenceObj.aggregateOrders(this.state.orderMap);
+    if(referenceObj.state.currentScreenName == 'viewOrderDetails'){
+      this.props.navigation.navigate('viewOrderDetails');
+    }
+    else{
+      this.props.navigation.navigate('listOrder');
+    }
 
-    this.props.navigation.navigate('listOrder')
   }
 
   renderSeparator = () => {

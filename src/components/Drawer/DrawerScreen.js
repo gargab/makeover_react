@@ -24,18 +24,19 @@ class DrawerScreen extends Component {
    this.props.navigation.dispatch(actionToDispatch)
   }
 
+  a = true;
   render () {
     return (
       <SafeAreaView style = {{flex:1}}>
         <ScrollView>
           <View>
-            <View style={styles.menuItem}>
+            <View style={ this.a ? styles.menuItem:styles.menuItem}>
               <Text onPress={this.navigateToScreen('splash')}>
                Splash
               </Text>
             </View>
 
-            <View style={styles.menuItem}>
+            <View style={ this.a ? styles.menuItem:styles.menuItemNoBorder}>
               <Text onPress={this.navigateToScreen('newOrder')}>
                New Order
               </Text>
@@ -84,5 +85,9 @@ const styles=StyleSheet.create({
        padding: 10,
        borderWidth: 0.5,
        borderColor: '#d6d7da'
-   }
+   },
+   menuItemNoBorder:{
+        height: 0,
+        opacity:0
+    }
 });
