@@ -11,6 +11,7 @@ import ListOrder from './src/components/NewOrder/ListOrder';
 import AddItems from './src/components/NewOrder/AddItems';
 import ViewOrders from './src/components/ViewOrders/ViewOrders';
 import NewUser from './src/components/NewUser/NewUser';
+import statScreen from './src/components/Stats/statScreen';
 
 
 const AppDrawerNavigator = createDrawerNavigator({
@@ -20,7 +21,8 @@ const AppDrawerNavigator = createDrawerNavigator({
   listOrder: ListOrder,
   addItems:AddItems,
   viewOrders: ViewOrders,
-  newUser: NewUser
+  newUser: NewUser,
+  stat: statScreen
 },
 {
   contentComponent: DrawerScreen,
