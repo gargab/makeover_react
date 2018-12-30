@@ -10,8 +10,8 @@ import NewCustomer from './src/components/NewOrder/NewCustomer';
 import ListOrder from './src/components/NewOrder/ListOrder';
 import AddItems from './src/components/NewOrder/AddItems';
 import ViewOrders from './src/components/ViewOrders/ViewOrders';
-import ViewOrderDetails from './src/components/ViewOrders/ViewOrderDetails';
-
+import NewUser from './src/components/NewUser/NewUser';
+import statScreen from './src/components/Stats/statScreen';
 
 
 const AppDrawerNavigator = createDrawerNavigator({
@@ -21,11 +21,12 @@ const AppDrawerNavigator = createDrawerNavigator({
   listOrder: ListOrder,
   addItems:AddItems,
   viewOrders: ViewOrders,
-  viewOrderDetails : ViewOrderDetails
+  newUser: NewUser,
+  stat: statScreen
 },
 {
   contentComponent: DrawerScreen,
-  initialRouteName: 'viewOrders',
+  initialRouteName: 'splash',
   drawerWidth: 300
 });
 
