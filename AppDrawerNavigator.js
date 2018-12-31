@@ -12,6 +12,7 @@ import AddItems from './src/components/NewOrder/AddItems';
 import ViewOrders from './src/components/ViewOrders/ViewOrders';
 import NewUser from './src/components/NewUser/NewUser';
 import statScreen from './src/components/Stats/statScreen';
+import ViewOrderDetails from './src/components/ViewOrders/ViewOrderDetails';
 
 
 const AppDrawerNavigator = createDrawerNavigator({
@@ -22,7 +23,8 @@ const AppDrawerNavigator = createDrawerNavigator({
   addItems:AddItems,
   viewOrders: ViewOrders,
   newUser: NewUser,
-  stat: statScreen
+  stat: statScreen,
+  viewOrderDetails : ViewOrderDetails
 },
 {
   contentComponent: DrawerScreen,
