@@ -8,6 +8,7 @@
     "android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && react-native run-android --port 9090"
   },
   "dependencies": {
+    "moment": "^2.23.0",
     "native-base": "^2.8.2",
     "react": "16.6.3",
     "react-native": "0.57.8",

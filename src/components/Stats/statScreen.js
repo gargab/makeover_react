@@ -4,6 +4,7 @@ import { TextField } from 'react-native-material-textfield';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Card } from "react-native-elements";
 import PieChartWithLabel from './PieChartWithLabel';
+import AxesGraph from './AxesGraph';
 
 
 class statScreen extends Component {
@@ -32,25 +33,68 @@ class statScreen extends Component {
               <PieChartWithLabel/>
             </View>
               <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
-                <View style={{flexDirection:'row'}}>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
                   <View style={styles.circle} />
                   <View style={{flex:3}}><Text> Pending </Text></View>
                 </View>
-                <View style={{flexDirection:'row'}}>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
                   <View style={styles.circle} />
                   <View style={{flex:3}}><Text> Cancelled </Text></View>
                 </View>
-                <View style={{flexDirection:'row'}}>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
                   <View style={styles.circle} />
                   <View style={{flex:3}}><Text> On Hold </Text></View>
                 </View>
-                <View style={{flexDirection:'row'}}>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
                   <View style={styles.circle} />
                   <View style={{flex:3}}><Text> Received </Text></View>
                 </View>
               </View>
             </View>
         </Card>
+
+        <Card containerStyle={styles.container}>
+          <View style={{flex:1, justifyContent: 'center', alignItems: 'center', padding: '3%'}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Orders - Daily </Text>
+          </View>
+
+          <View style={{flexDirection: 'row', flex: 3, justifyContent: 'space-between'}}>
+            <View style={{flex:2}}>
+              <PieChartWithLabel/>
+            </View>
+              <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={styles.circle} />
+                  <View style={{flex:3}}><Text> Pending </Text></View>
+                </View>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={styles.circle} />
+                  <View style={{flex:3}}><Text> Cancelled </Text></View>
+                </View>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={styles.circle} />
+                  <View style={{flex:3}}><Text> On Hold </Text></View>
+                </View>
+                <View style={{flexDirection:'row', alignItems: 'center', justifyContent: 'center'}}>
+                  <View style={styles.circle} />
+                  <View style={{flex:3}}><Text> Received </Text></View>
+                </View>
+              </View>
+            </View>
+        </Card>
+
+        <Card containerStyle={styles.container}>
+
+          <View style={{flex:1, justifyContent: 'center', alignItems: 'center', padding: '3%'}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Orders - Daily </Text>
+          </View>
+
+          <View style={{flex: 3}}>
+            <AxesGraph/>
+          </View>
+        </Card>
+
+
         </ScrollView>
     );
   }
